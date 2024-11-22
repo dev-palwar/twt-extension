@@ -1,11 +1,8 @@
-import { useState } from "react";
-import reactLogo from "@/assets/react.svg";
-import wxtLogo from "/wxt.svg";
 import "./App.css";
 
 function App() {
   const handleClick = () => {
-    browser.runtime.sendMessage({ command: "followAll" });
+    browser.runtime.sendMessage({ command: "followAll", limit: 5 });
   };
 
   return (

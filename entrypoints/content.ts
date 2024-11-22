@@ -28,14 +28,41 @@ export default defineContentScript({
           );
 
           if (button) {
-            (button as HTMLElement).click();
-            console.log("Button clicked successfully.");
-            setTimeout(() => {
-              browser.runtime.sendMessage({ command: "tabCompleted" });
-              sendResponse({ success: true });
-            }, 2000);
+            // Safety check if the button exists before accessing it
+            const ariaLabel = button.getAttribute("aria-label");
+
+            // Check for Follow button
+            if (ariaLabel && ariaLabel.split(" ")[0] == "Follow") {
+              (button as HTMLElement).click();
+              console.log("Follow button clicked successfully.");
+
+              // Waiting for the action and send message
+              setTimeout(() => {
+                browser.runtime.sendMessage({ command: "tabCompleted" });
+                sendResponse({ success: true });
+              }, 2000);
+
+              // Checking for Subscribe button
+            } else if (ariaLabel && ariaLabel.split(" ")[0] == "Subscribe") {
+              console.log("Subscribe button found. Closing the tab.");
+
+              setTimeout(() => {
+                browser.runtime.sendMessage({ command: "tabCompleted" });
+                sendResponse({ success: true });
+              }, 2000);
+
+              // Check for Unfollow button
+            } else if (ariaLabel && ariaLabel.split(" ")[0] == "Following") {
+              console.log("Unfollow button found. Closing the tab.");
+
+              setTimeout(() => {
+                browser.runtime.sendMessage({ command: "tabCompleted" });
+                sendResponse({ success: true });
+              }, 2000);
+            }
           } else {
             console.log("Button not found. Retrying...");
+            // Retries after a delay if the button is not found
             setTimeout(tryClickButton, 2000);
           }
         };
