@@ -34,7 +34,6 @@ export default defineBackground(() => {
     }
   });
 
-  // Function to open the next tab in the process
   function openNextTab() {
     if (currentIndex < links.length) {
       const link = links[currentIndex];
