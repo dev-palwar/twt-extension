@@ -1,3 +1,4 @@
-o use this extension, clone the repository, install the dependencies, and run "npm run dev".
+To use this extension, clone the repository, install the dependencies, and run "npm run dev".
 
-![Demo](./assets/demo.mp4)
+https://github.com/user-attachments/assets/829795f9-1b42-494b-a7bf-1c763f021dbd
+
